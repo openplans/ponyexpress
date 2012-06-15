@@ -23,10 +23,25 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      var socket = io.connect('http://openplans-ponyexpress.herokuapp.com');
+      var socket = io.connect('http://openplans-ponyexpress.herokuapp.com'),
+          coderSound = document.getElementById('coder-sound'),
+          commitMsg = document.getElementById('commit-msg');
+
       socket.on('commit', function (data) {
         console.log(data);
+        play(data);
       });
+
+      coderSound.addEventListener('ended', function(){
+        this.currentTime = 0;
+        this.pause();
+        commitMsg.play();
+      }, false);
+
+      var play = function(data) {
+        coderSound.src = data.coderSoundUrl;
+        commitMsg.src = data.messageUrl;
+      };
 
     </script>
   </body>
