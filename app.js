@@ -34,7 +34,7 @@ app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });
 
-app.post('/commit', function (req, res) {
+app.post('/', function (req, res) {
   var payload = JSON.parse(req.body.payload),
       data = {
         "messageUrl": getMessageUrl(payload),
