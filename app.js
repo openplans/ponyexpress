@@ -14,7 +14,7 @@ app.get('/', function (req, res) {
 
 app.post('/commit', function (req, res) {
   console.log('---commit---');
-  console.log(req.body);
-  io.sockets.emit('commit', req.body.payload);
+  console.log(req);
+  io.sockets.emit('commit', req.params.payload);
   res.send('thanks github!');
 });
