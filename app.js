@@ -12,6 +12,7 @@ io.configure(function () {
 
 app.configure(function(){
   app.use(express.bodyParser());
+  app.use(express.static(__dirname + '/static'));
 });
 
 // Start Server
