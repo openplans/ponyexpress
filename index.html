@@ -31,7 +31,7 @@
       });
 
       var getMessageUrl = function(data) {
-        var message = data.commits[0].name + ' pushed ' + data.commits.length +
+        var message = data.commits[0].author.name + ' pushed ' + data.commits.length +
             (data.commits.length > 1 ? ' commits' : ' commit') + ' to ' + data.repository.name;
 
         return 'http://speech.jtalkplugin.com/api/?speech=' + encodeURI(message);
