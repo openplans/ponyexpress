@@ -7,6 +7,10 @@ io.configure(function () {
   io.set("polling duration", 10);
 });
 
+app.configure(function(){
+  app.use(express.bodyParser());
+});
+
 app.listen(port);
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
@@ -14,7 +18,7 @@ app.get('/', function (req, res) {
 
 app.post('/commit', function (req, res) {
   console.log('---commit---');
-  console.log(req);
-  io.sockets.emit('commit', req.params.payload);
+  console.log(req.body);
+  io.sockets.emit('commit', req.body.payload);
   res.send('thanks github!');
 });
