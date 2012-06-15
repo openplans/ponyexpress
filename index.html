@@ -26,7 +26,20 @@
       var socket = io.connect('http://openplans-ponyexpress.herokuapp.com');
       socket.on('commit', function (data) {
         console.log(data);
+
+        console.log(getMessageUrl(data));
       });
+
+      var getMessageUrl = function(data) {
+        var message = data.commits[0].name + ' pushed ' + data.commits.length +
+            (data.commits.length > 1 ? ' commits' : ' commit') + ' to ' + data.repository.name;
+
+        return 'http://speech.jtalkplugin.com/api/?speech=' + encodeURI(message);
+      };
+
+      var getCoderSoundUrl = function(data) {
+
+      };
     </script>
   </body>
 </html>
