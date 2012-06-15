@@ -12,6 +12,6 @@ app.get('/', function (req, res) {
 });
 
 app.post('/commit', function (req, res) {
-  io.sockets.emit('news', { hello: 'world' });
+  io.sockets.emit('commit', req.body.payload);
   res.send('thanks github!');
 });
