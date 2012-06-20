@@ -1,7 +1,7 @@
 var express = require('express'),
     app = express.createServer(),
     io = require('socket.io').listen(app),
-    sounds = require('./sounds'),
+    request = require('request'),
     port = process.env.PORT || 5000;
 
 // Config
@@ -12,7 +12,7 @@ io.configure(function () {
 
 app.configure(function(){
   app.use(express.bodyParser());
-  app.use("/static", express.static(__dirname + '/static'));
+  app.use('/static', express.static(__dirname + '/static'));
 });
 
 // Start Server
@@ -26,7 +26,7 @@ var getMessageUrl = function(data) {
   return 'http://speech.jtalkplugin.com/api/?speech=' + encodeURI(message);
 };
 
-var getCoderSoundUrl = function(data) {
+var getCoderSoundUrl = function(sounds, data) {
   return sounds.user[data.commits[0].author.username];
 };
 
@@ -36,12 +36,14 @@ app.get('/', function (req, res) {
 });
 
 app.post('/', function (req, res) {
-  var payload = JSON.parse(req.body.payload),
-      data = {
-        "messageUrl": getMessageUrl(payload),
-        "coderSoundUrl": getCoderSoundUrl(payload)
-      };
+  var payload = JSON.parse(req.body.payload);
 
-  io.sockets.emit('commit', data);
+  request('https://raw.github.com/openplans/ponyexpress/master/sounds.json', function(error, response, body) {
+    io.sockets.emit('commit', {
+      'messageUrl': getMessageUrl(payload),
+      'coderSoundUrl': getCoderSoundUrl(JSON.parse(body), payload)
+    });
+  });
+
   res.send('thanks github!');
 });
