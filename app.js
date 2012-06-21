@@ -27,7 +27,7 @@ var getMessageUrl = function(data) {
 };
 
 var getCoderSoundUrl = function(sounds, data) {
-  return sounds.user[data.commits[0].author.username];
+  return sounds[data.commits[0].author.username] || sounds['default'];
 };
 
 // Routes
