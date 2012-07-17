@@ -24,7 +24,7 @@ var getMessageUrl = function(data) {
       message = name + ' pushed ' + data.commits.length +
         (data.commits.length > 1 ? ' commits' : ' commit') + ' to ' + data.repository.name;
 
-  return 'http://speech.jtalkplugin.com/api/?speech=' + encodeURI(message);
+  return 'http://translate.google.com/translate_tts?tl=en&q=' + encodeURI(message);
 };
 
 var getCoderSoundUrl = function(sounds, data) {
