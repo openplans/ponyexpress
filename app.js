@@ -20,7 +20,7 @@ app.listen(port);
 
 // Helpers
 var getMessageUrl = function(data) {
-  var name = data.commits[0].author.name === 'Mjumbe Poe' ? 'joo mbay poe' : data.commits[0].author.name,
+  var name = data.commits[0].author.name === 'Mjumbe Wawatu Poe' ? 'joo mbay poe' : data.commits[0].author.name,
       message = name + ' pushed ' + data.commits.length +
         (data.commits.length > 1 ? ' commits' : ' commit') + ' to ' + data.repository.name;
 
